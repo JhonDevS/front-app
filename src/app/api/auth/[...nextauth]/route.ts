@@ -4,11 +4,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const mockUser = {
   id: "1",
   name: "Jhon",
-  email: "test",
+  email: "test@test.com",
   pass: "1234",
 };
 
 const simulationfetch = async (email: string, password: string) => {
+  console.log('Email**:', email);
+  console.log('Password**', password);
   if (email === mockUser.email && password === mockUser.pass) {
     return mockUser;
   }
@@ -18,14 +20,15 @@ const simulationfetch = async (email: string, password: string) => {
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: "email", type: "email" },
+        password: { label: "password", type: "password" },
       },
 
       async authorize(credentials) {
-        const user = await simulationfetch(credentials?.username ?? '', credentials?.password ?? '');
+        console.log('Credentials', credentials)
+        const user = await simulationfetch(credentials?.email ?? '', credentials?.password ?? '');
         if (user) return user;
 
         return null;
@@ -40,8 +43,11 @@ const handler = NextAuth({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       session.user = token as any;
       return session;
-    }
-  }
+    },
+  },
+  pages: {
+    signIn: "/login",
+  },
 });
 
 export { handler as GET, handler as POST };

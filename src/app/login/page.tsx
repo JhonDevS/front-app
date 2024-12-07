@@ -1,7 +1,7 @@
 import React from 'react';
 import 'tailwindcss/tailwind.css';
 import 'daisyui/dist/full.css';
-import { LoginForm } from '../ui/login-form';
+import { LoginForm } from '../ui/components/loginForm/loginForm';
 
 const LoginPage= () => {
   return (
