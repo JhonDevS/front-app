@@ -1,0 +1,36 @@
+name: Version and Changelog Update
+
+on:
+  pull_request:
+    branches: 
+      - main
+    types: 
+      - closed
+
+jobs:
+  version_and_changelog:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install standard-version
+      run: npm install -g standard-version
+    
+    - name: Configure Git
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+    
+    - name: Generate Version and Changelog
+      run: |
+        standard-version
+        git push --follow-tags origin main
