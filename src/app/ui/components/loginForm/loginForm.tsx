@@ -16,7 +16,7 @@ export const LoginForm = () => {
       <div className="w-full max-w-md p-8 space-y-3 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-center">Iniciar Sesión</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <InputForm label="Correo Electrónico" type="email" placeholder="correo@ejemplo.com" value={email} onChange={handlerEmail} error={errors.email} />
+          <InputForm label="Correo Electrónico" type="text" placeholder="correo@ejemplo.com" value={email} onChange={handlerEmail} error={errors.email} />
           <InputForm label="Contraseña" value={password} type="password" placeholder="******" onChange={handlerPassword} error={errors.password} />
           <div className="form-control">
             <button type="submit" className="btn btn-primary w-full" disabled={isLoading}>
