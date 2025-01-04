@@ -1,21 +1,10 @@
-import NextAuth from "next-auth";
+import { signInSupabase } from "@/utils/supabase";
+import NextAuth, { User as NextAuthUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const mockUser = {
-  id: "1",
-  name: "Jhon",
-  email: "test@test.com",
-  pass: "1234",
-};
-
-const simulationfetch = async (email: string, password: string) => {
-  console.log('Email**:', email);
-  console.log('Password**', password);
-  if (email === mockUser.email && password === mockUser.pass) {
-    return mockUser;
-  }
-  return null;
-};
+interface CustomUser extends NextAuthUser {
+  accessToken?: string;
+}
 
 const handler = NextAuth({
   providers: [
@@ -28,8 +17,12 @@ const handler = NextAuth({
 
       async authorize(credentials) {
         console.log('Credentials', credentials)
-        const user = await simulationfetch(credentials?.email ?? '', credentials?.password ?? '');
-        if (user) return user;
+        const {data} = await signInSupabase({
+          email: credentials?.email ?? '', 
+          password: credentials?.password ?? ''
+        });
+        if (typeof data !== 'string' && data.user) 
+          return { ...data.user, accessToken: data.session.access_token };
 
         return null;
       }
@@ -37,7 +30,11 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, user };
+      if (user) {
+        const customUser = user as CustomUser;
+        token.accessToken = customUser.accessToken;
+      }
+      return token;
     },
     async session({ session, token }) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
