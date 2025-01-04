@@ -1,4 +1,6 @@
-import { BadgeError } from "./badgeError/badgeError";
-import { InputForm } from "./inputForm/inputForm";
+import { BadgeError } from "./badgeError";
+import { InputForm } from "./inputForm";
+import { SingOutButton } from "./singOutButton";
+import { GoogleButton } from "./GoogleButton";
 
-export { BadgeError, InputForm };
+export { BadgeError, InputForm, SingOutButton, GoogleButton };

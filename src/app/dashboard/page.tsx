@@ -1,5 +1,6 @@
 'use client'
 import { useSession } from "next-auth/react";
+import {SingOutButton} from '@/app/ui/baseComponentes'
 
 const DashBoardPage = () => {
   const { data: session } = useSession();
@@ -21,6 +22,7 @@ const DashBoardPage = () => {
   };
   return (
     <div>
+      <SingOutButton/>
       <h1>Dashboard</h1>
       <button onClick={handleClick}>Click me!</button>
     </div>
