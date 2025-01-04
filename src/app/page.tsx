@@ -1,14 +1,13 @@
-import { LoginForm } from "../ui/components/loginForm/loginForm";
-import { ToggleTheme } from "../ui/components/toggleTheme/toggleTheme";
+import { LoginForm } from "./ui/components/loginForm";
+import { ToggleTheme } from "./ui/components/toggleTheme";
 
 
 export default function Home() {
   
   return (
-    <div>
-      <h1>Home</h1>
+    <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
       <ToggleTheme />
       <LoginForm />
-    </div>
+    </main>
   );
 }

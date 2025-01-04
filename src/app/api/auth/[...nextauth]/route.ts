@@ -1,6 +1,7 @@
 import { signInSupabase } from "@/utils/supabase";
 import NextAuth, { User as NextAuthUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from 'next-auth/providers/google'
 
 interface CustomUser extends NextAuthUser {
   accessToken?: string;
@@ -27,6 +28,11 @@ const handler = NextAuth({
         return null;
       }
     }),
+    GoogleProvider({
+      name: 'google',
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    })
   ],
   callbacks: {
     async jwt({ token, user }) {

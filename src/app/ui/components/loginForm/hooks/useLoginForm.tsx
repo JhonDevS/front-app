@@ -45,7 +45,16 @@ export const useLoginForm = () => {
     router.push('/dashboard');
   };
 
-  return {handleSubmit, email, handlerEmail, password, handlerPassword, isLoading, errors};
+  const handlerSubmitGoogle = async () => {
+    setIsLoading(true);
+    const signInResult = await signIn('google', {
+      callbackUrl: '/dashboard',
+    });
+    if (signInResult?.error) alert('Error al iniciar sesión');
+    setIsLoading(false);
+  }
+
+  return {handleSubmit, handlerSubmitGoogle, email, handlerEmail, password, handlerPassword, isLoading, errors};
 };
 
 // TODO: Improve validation of password, for example: symbols, numbers, uppercase 
