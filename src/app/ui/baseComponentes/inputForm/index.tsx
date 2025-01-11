@@ -12,11 +12,12 @@ export const InputForm: React.FC<InputFormProps> = ({ label, value, type, onChan
   return (
     <div className="form-control gap-2">
       <label className="label">
-        <span className="label-text">{label}</span>
+        <span className="text-slate-900">{label}</span>
       </label>
       <input
         type={type ?? 'text'}
         placeholder={placeholder ?? ''}
+        data-theme="retro"
         className="input input-bordered w-full"
         value={value}
         onChange={onChange}

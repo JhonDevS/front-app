@@ -13,17 +13,17 @@ export const LoginForm = () => {
     console.log('Error', errors);
   }, [errors]);
   return (
-    <section className="w-full max-w-md">
+    <section className="w-full max-w-md ">
       <form onSubmit={handleSubmit} className="space-y-6">
         <InputForm label="Correo Electrónico" type="text" placeholder="correo@ejemplo.com" value={email} onChange={handlerEmail} error={errors.email} />
         <InputForm label="Contraseña" value={password} type="password" placeholder="******" onChange={handlerPassword} error={errors.password} />
         <div className="form-control">
-          <button type="submit" className="btn btn-primary w-full" disabled={isLoading}>
+          <button type="submit" className="btn btn-primary w-full text-white" disabled={isLoading}>
             {isLoading ? 'Cargando...' : 'Iniciar Sesión'}
           </button>
         </div>
       </form>
-      <GoogleButton onclick={handlerSubmitGoogle} styles="w-full mt-5" />
+      <GoogleButton onclick={handlerSubmitGoogle} isLoading={isLoading} styles="w-full mt-5 btn-secondary" />
     </section>
   )
 };

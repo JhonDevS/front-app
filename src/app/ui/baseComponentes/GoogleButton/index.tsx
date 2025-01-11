@@ -7,12 +7,12 @@ export const GoogleButton = ({onclick, styles, isLoading}:{onclick?: () => Promi
       onClick={onclick}
       disabled={isLoading}
       >
-        <span className=''>
+        <span className='text-white'>
           {
             isLoading ? 'Cargando...' : 'Iniciar con'
           }
         </span>
-        <AiOutlineGoogle size={20} style={{ color: '#4285F4', margin: '0px', padding: '0px' }} />
+        <AiOutlineGoogle size={20} style={{ color: '#fff', margin: '0px', padding: '0px' }} />
     </button>
   )
 }    

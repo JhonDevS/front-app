@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import SessionAuthProvider from "@/context/SessionAuthprovider";
+import { ToggleTheme } from "./ui/components";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,14 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="winter">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-white antialiased`}
       >
-        <main>
+        <main className="relative min-h-screen ">
           <SessionAuthProvider>
             {children}
           </SessionAuthProvider>
+          <div className="fixed bottom-4 right-4">
+            <ToggleTheme />
+          </div>
         </main>
       </body>
     </html>

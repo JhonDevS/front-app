@@ -17,6 +17,7 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["light", "dark"], // daisyUI themes. Choose from 'light', 'dark', 'cupcake', 'bumblebee' and 'emerald'
+    themes: ['winter', 'night']
   },
+  darkMode: ['selector', '[data-theme="night"]']
 } satisfies Config;
